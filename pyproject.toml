@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "aimo-api"
+version = "0.1.0"
+description = "REST API test."
+authors = ["Hugo Silva Álvarez <hugofer93@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "~3.8"
+python-decouple = "~3.4"
+bcrypt = "~3.2"
+bottle = "~0.12"
+peewee = "~3.14"
+marshmallow = "~3.12"
+PyJWT = "~2.1"
+
+[tool.poetry.dev-dependencies]
+pylint = "~2.8"
+pycodestyle = "~2.7"
+pytest = "~6.2"
+
+[build-system]

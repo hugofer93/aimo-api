@@ -1,51 +1,97 @@
-# Creación de un API REST
+# bottle-rest-api
 
-La prueba consistirá en crear un simple API REST para un único recurso, la prueba se dividirá en una funcionalidad básica y en funcionalidades adicionales que sumarán puntos a la evaluación. 
+This is a REST API with [Bottle.py](https://bottlepy.org/docs/0.12/), [Peewee ORM](http://docs.peewee-orm.com/en/latest/), [Marshmallow](https://marshmallow.readthedocs.io/en/stable/) and [PyJWT](https://pyjwt.readthedocs.io/en/stable/).
 
-Este repositorio contiene los archivos base, los cambios realizados deben subirse en un repositorio propio, el link de ese repositorio debe enviarse por email.
 
-## 1. Funcionalidad básica
-Se desea un endpoint para poder administrar **notas** (crear y listar), los datos se guardará en una base de datos **sqlite**. Para ello se utilizarán los siguientes paquetes de Python.
-* [peewee](http://docs.peewee-orm.com/en/latest/ "peewee") (ORM)
-* [bottle](https://bottlepy.org/docs/dev/ "bottle") (miniframework web)
+## Overview: Bottle REST API
 
-Los campos que tendrá el modelo no son relevantes.
+Problem Statement proposed by [AIMO](https://github.com/aimo)
 
-## 2. Funcionalidades adicionales
-Las siguientes funcionalidades se construirán sobre la funcionalidad base.
+Repo: https://github.com/aimo/technical-test-backend 
 
-**Serialización y validación**
+**See the details in** [ProblemStatement.md](ProblemStatement.md)
 
-Se desea validar los datos que se reciben via POST y mostrar los errores al usuario que usa el API, serializar la lista de objetos para enviarlas como json. Para ello se utilizará la librería [marshmallow](https://marshmallow.readthedocs.io/en/latest/ "marshmallow").
 
-**Usuario y Autentificación**
+## Table of Contents
 
-Se desea que el API sea restringido mediante algún método de autenficación.
+* [Overview](#bottle-rest-api)
+* [Main Dependencies](#Main-Dependencies)
+* [Python Configuration](#Python-Configuration)
+* [Project Configuration](#Project-Configuration)
 
-**JWT**
 
-Se desea que el usuario se autentifique mediante json web tokens, para ello se utializará la librería [pyjwt](https://github.com/jpadilla/pyjwt "pyjwt")
+## Main Dependencies
 
-**Autorización**
+    Python      ~3.8
+    Bottle      ~0.12
+    Peewee      ~3.14
+    marshmallow ~3.12
+    PyJWT       ~2.1
 
-Se desea asociar una **nota** con un **usuario**, de tal manera que cada usuario solo pueda ver sus propias notas.
+For more details, see the [pyproject.toml file](pyproject.toml).
 
-**Cliente del API**
+## Python Configuration
 
-Se desea tener un cliente web que haga uso del API desde frontend (html y javascript). Ver siguiente sección.
+- [Install Pyenv](https://github.com/pyenv/pyenv-installer)
+- Install Python ~3.8:
 
-# Estructura de archivos
-El repositorio contiene archivos que sirven como guia, pero se deja la libertad de hacer los cambios que se consideren necesarios.
-* **.gitignore** - Archivos ignorados por git, añadir la base de datos sqlite que se genere.
-* **requirements.txt** - Los paquetes python que se utilizarán para la prueba. Se recomienda usar un entorno virtual (ejem. [virtualenv](https://virtualenv.pypa.io/en/stable/ "virtualenv")) para instalarlos.
-* **server.py** - Contendrá tóda la lógica del api, este correrá en el puerto 8000.
-* **client.py** - Un pequeño servidor que corre en el puerto 5000 y sirve el archivo index.html, aquí no se necesita hacer ninguna modificación.
-* **index.html** - Donde idealmente deberá estar toda la lógica para loguearse y mostrar los datos del api.
+    If you want to see **all available versions of Python**:
 
-# Objetivos de la prueba
-* Evaluar el conocimiento general del lenguaje Python.
-* Evaluar el conocimiento en arquitecturas web (MVC, REST).
-* Comprobar el conocimiento independientemente de la herramienta / framework.
-* Evaluar buenas prácticas en el código relacionadas con Python (pep8).
-* Evaluar conocimientos basicos de frontend.
-* Evaluar el modelo mental que se tiene para la organización de classes, funciones, módulos.
+        $ pyenv install --list
+
+    Now install the version you want of Python 3.8. e.g.:
+
+        $ pyenv install 3.8.10
+
+- [Install Poetry](https://python-poetry.org/docs/#installation)
+
+- Configure the creation of the **virtual environment within the project:**
+
+        $ vim $HOME/.bashrc
+
+    **Add these lines to the end of the file:**
+
+        # Poetry
+        export POETRY_VIRTUALENVS_IN_PROJECT=1
+
+## Project Configuration
+
+- Clone this repo:
+
+        $ git clone https://github.com/hugofer93/aimo-api.git
+
+- Create `.env` file based on `.env.sample`:
+
+        $ cp .env.sample .env
+
+- **Activate the installed Python 3.8 version**. e.g.:
+
+        $ pyenv shell 3.8.10
+
+- Install dependencies **in Production environment:**
+
+        $ poetry install --no-dev
+
+    **For Development environment:**
+
+        $ poetry install
+
+- Activate virtual environment (optional):
+
+        $ poetry shell
+
+    Alternatively you can run without activating the virtual environment:
+
+        $ poetry run <commands described below>
+
+    e.g.:
+
+        $ poetry run python file.py
+
+- If you are in development environment:
+
+        $ python server.py
+
+    In another terminal:
+
+        $ python client.py
